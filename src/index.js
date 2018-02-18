@@ -5,14 +5,20 @@ import { sumAll, sumByOwner } from './aggregateCounts'
 
 import type { ReportSpec } from './config'
 
+export type CodeReport = {
+  byFile: Object,
+  byAll: Object,
+  byOwner?: ?Object,
+}
+
 /**
  * Generate a report over the `basedir`
  */
-export const report = async (
+export const generateReport = async (
   basedir: string,
   reportSpec: ReportSpec,
   codeownersPath?: string,
-) => {
+): Promise<CodeReport> => {
   const ownerEntries = codeownersPath
     ? parseCodeownersFile(codeownersPath)
     : null
