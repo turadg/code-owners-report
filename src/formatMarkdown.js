@@ -18,7 +18,10 @@ export const markdownAllTable = (specMetricKeys: string[], all: Object) => {
   return markdownTable([headers, rows])
 }
 
-export const markdownOwnersTable = (specMetricKeys: string[], byOwner: Object) => {
+export const markdownOwnersTable = (
+  specMetricKeys: string[],
+  byOwner: Object,
+) => {
   const metricKeys = [FILES_SUM_METRIC_KEY, ...specMetricKeys]
 
   const headers = ['owner', ...metricKeys]

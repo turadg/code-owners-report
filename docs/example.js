@@ -8,6 +8,7 @@ const fs = require('mz/fs')
 const { findCodeownersPath, generateReport, formatMarkdownReport } = require('../dist')
 
 const sampleSpec = {
+  omit: /Metrics.js$/,
   eslintFlags: { 'no-console': true },
   regexpMetrics: { FIXME: /FIXME/g, TODO: /TODO/g, 'Flowtype work': /\$Flow/g },
 }

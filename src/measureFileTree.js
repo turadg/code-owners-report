@@ -50,6 +50,8 @@ export default async function measureFileTree(
         spec,
       )
       Object.assign(metrics, treeMetrics)
+    } else if (spec.omit && subpath.match(spec.omit)) {
+      console.log('  omitting file', subpath)
     } else {
       console.log('  measuring file', subpath)
       const fileMetrics: FileMetrics = await measureFile(subpath, spec)
