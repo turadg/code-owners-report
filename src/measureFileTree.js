@@ -1,6 +1,6 @@
 // @flow
 import fs from 'mz/fs'
-import { testRegExpMatches } from './regexpMetrics'
+import { countRegExpMatches } from './regexpMetrics'
 import { countEslintRuleViolations } from './eslintMetrics'
 
 import type { FileMetrics, FilesMetricsMap, ReportSpec } from './config'
@@ -14,7 +14,7 @@ const measureFile = async (
   const contents = await fs.readFile(filePath, { encoding: 'utf8' })
 
   if (spec.regexpMetrics) {
-    Object.assign(metrics, testRegExpMatches(contents, spec.regexpMetrics))
+    Object.assign(metrics, countRegExpMatches(contents, spec.regexpMetrics))
   }
 
   if (spec.eslintFlags) {

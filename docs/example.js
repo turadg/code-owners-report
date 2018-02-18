@@ -8,7 +8,7 @@ const { findCodeownersPath, report, formatMarkdownReport } = require('../dist')
 
 const sampleSpec = {
   eslintFlags: { 'no-console': true },
-  regexpMetrics: { markdown: /markdown/ },
+  regexpMetrics: { FIXME: /FIXME/g, TODO: /TODO/g, 'Flowtype work': /\$Flow/g },
 }
 
 report('src', sampleSpec, findCodeownersPath()).then(report => {

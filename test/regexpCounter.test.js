@@ -1,8 +1,12 @@
-import { testRegExpMatches } from '../src/regexpMetrics'
+import { countRegExpMatches } from '../src/regexpMetrics'
 
-describe('testRegExpMatches', () => {
+describe('countRegExpMatches', () => {
   it('returns counts', () => {
-    const counts = testRegExpMatches('bstr', { a: /a/, b: /b/ })
-    expect(counts).toEqual({ a: false, b: true })
+    const counts = countRegExpMatches('bstrb', {
+      a: /a/,
+      b: /b/g,
+      singleb: /b/,
+    })
+    expect(counts).toEqual({ a: 0, b: 2, singleb: 1 })
   })
 })
