@@ -7,7 +7,7 @@ import { whoOwns, type OwnersEntry } from './codeowners'
 const mkInitialCounts = (spec: ReportSpec) => {
   const headings = [].concat(
     spec.regexpMetrics && Object.keys(spec.regexpMetrics),
-    spec.eslintRules && Object.keys(spec.eslintRules),
+    spec.eslintFlags && Object.keys(spec.eslintFlags),
   )
   const counts = {}
   for (const heading of headings) {

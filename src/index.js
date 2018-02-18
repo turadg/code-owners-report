@@ -1,19 +1,9 @@
 // @flow
-import fs from 'mz/fs'
-
 import measureFileTree from './measureFileTree'
-import { parseCodeownersFile, findCodeownersPath } from './codeowners'
-
+import { parseCodeownersFile } from './codeowners'
 import { sumAll, sumByOwner } from './aggregateCounts'
 
-import {formatReport} from './formatMarkdown'
-
 import type { ReportSpec } from './config'
-
-const sampleSpec: ReportSpec = {
-  eslintRules: { 'no-console': true },
-  regexpMetrics: { metrics: /metrics/ },
-}
 
 export const report = async (
   basedir: string,
@@ -24,16 +14,15 @@ export const report = async (
     ? parseCodeownersFile(codeownersPath)
     : null
 
-  const byFile = await measureFileTree('src', sampleSpec)
+  const byFile = await measureFileTree('src', reportSpec)
 
-  const byAll = sumAll(sampleSpec, byFile)
+  const byAll = sumAll(reportSpec, byFile)
   const byOwner = ownerEntries
-    ? sumByOwner(sampleSpec, byFile, ownerEntries)
+    ? sumByOwner(reportSpec, byFile, ownerEntries)
     : null
   return { byFile, byAll, byOwner }
 }
 
-report('src', sampleSpec, findCodeownersPath()).then(report => {
-  const content = formatReport(sampleSpec, report)
-  fs.writeFileSync('REPORT.md', content)
-})
+export { findCodeownersPath } from './codeowners'
+export { formatReport as formatMarkdownReport } from './formatMarkdown'
+export type { ReportSpec }

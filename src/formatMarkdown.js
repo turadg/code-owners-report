@@ -40,7 +40,7 @@ export const markdownFileTable = (
 export const formatReport = (reportSpec: ReportSpec, report: *) => {
   const metricKeys = [
     ...Object.keys(reportSpec.regexpMetrics || {}),
-    ...Object.keys(reportSpec.eslintRules || {}),
+    ...Object.keys(reportSpec.eslintFlags || {}),
   ]
 
   const content = [

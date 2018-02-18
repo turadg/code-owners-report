@@ -17,10 +17,10 @@ const measureFile = async (
     Object.assign(metrics, testRegExpMatches(contents, spec.regexpMetrics))
   }
 
-  if (spec.eslintRules) {
+  if (spec.eslintFlags) {
     Object.assign(
       metrics,
-      countEslintRuleViolations(contents, spec.eslintRules),
+      countEslintRuleViolations(contents, spec.eslintFlags),
     )
   }
 

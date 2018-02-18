@@ -12,5 +12,5 @@ export type RuleFlags = { [ruleId: string]: boolean }
 
 export type ReportSpec = {
   regexpMetrics?: ExpressionMap,
-  eslintRules?: RuleFlags,
+  eslintFlags?: RuleFlags,
 }
