@@ -27,6 +27,9 @@ const measureFile = async (
   return metrics
 }
 
+/**
+ * Report metrics on every file within `dir`
+ */
 export default async function measureFileTree(
   dir: string,
   spec: ReportSpec,

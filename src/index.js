@@ -5,6 +5,9 @@ import { sumAll, sumByOwner } from './aggregateCounts'
 
 import type { ReportSpec } from './config'
 
+/**
+ * Generate a report over the `basedir`
+ */
 export const report = async (
   basedir: string,
   reportSpec: ReportSpec,

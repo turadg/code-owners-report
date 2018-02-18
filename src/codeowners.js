@@ -63,6 +63,9 @@ export const parseCodeownersFile = (pathname: string): OwnersEntry[] => {
   return ownerEntries
 }
 
+/*
+ * Return list of owners per CODEOWNERS for the given file.
+ */
 export const whoOwns = (
   ownersEntries: OwnersEntry[],
   filePath: string,
