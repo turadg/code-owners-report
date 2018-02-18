@@ -1,15 +1,17 @@
+// @flow
+
 import { CLIEngine } from 'eslint'
+
+import type { RuleFlags } from './config'
 
 const eslinter = new CLIEngine({
   useEslintrc: true,
 })
 
-type RuleFlags = { [ruleId: string]: boolean }
-
 type Counter = boolean => number
 
 export const countEslintRuleViolations = (
-  contents,
+  contents: string,
   ruleFlags: RuleFlags,
 ): $ObjMap<RuleFlags, Counter> => {
   const { results } = eslinter.executeOnText(contents)

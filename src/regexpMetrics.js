@@ -1,8 +1,6 @@
 // @flow
 
-export type ExpressionMap = {
-  [key: string]: RegExp,
-}
+import type { ExpressionMap } from './config'
 
 type Tester = RegExp => boolean
 
@@ -10,10 +8,10 @@ export const testRegExpMatches = (
   contents: string,
   expressionMap: ExpressionMap,
 ): $ObjMap<ExpressionMap, Tester> => {
-  const regexpReducer = (acc = {}, key) => {
+  const matches = {}
+  for (const key of Object.keys(expressionMap)) {
     const re = expressionMap[key]
-    acc[key] = !!contents.match(re)
-    return acc
+    matches[key] = !!contents.match(re)
   }
-  return Object.keys(expressionMap).reduce(regexpReducer, {})
+  return matches
 }
