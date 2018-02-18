@@ -2,7 +2,7 @@ import { parseCodeownersFile, whoOwns } from '../src/codeowners'
 
 describe('parseCodeownersFile', () => {
   it('reads file in this repo', () => {
-    const ownerEntries = parseCodeownersFile('../CODEOWNERS')
+    const ownerEntries = parseCodeownersFile('./CODEOWNERS')
     expect(ownerEntries).toEqual([
       {
         match: jasmine.any(Function),
@@ -36,7 +36,7 @@ describe('parseCodeownersFile', () => {
 })
 
 describe('whoOwns', () => {
-  const ownerEntries = parseCodeownersFile('../CODEOWNERS')
+  const ownerEntries = parseCodeownersFile('./CODEOWNERS')
   it('handles global', () => {
     expect(whoOwns(ownerEntries, 'no-match')).toEqual([
       '@global-owner1',
