@@ -11,8 +11,9 @@ const mkInitialCounts = (spec: ReportSpec) => {
   )
   const counts = {}
   for (const heading of headings) {
-    if (!heading) continue
-    counts[heading] = 0
+    if (heading) {
+      counts[heading] = 0
+    }
   }
   return counts
 }

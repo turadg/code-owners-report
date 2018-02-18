@@ -17,7 +17,6 @@ export const findCodeownersPath = (): string => {
   const codeownersPath = findUp.sync('CODEOWNERS', { cwd: process.cwd() })
   const trueCaseCodeownersPath = trueCasePath(codeownersPath)
 
-  const codeownersDirectory = path.dirname(trueCaseCodeownersPath)
   const codeownersFile = path.basename(trueCaseCodeownersPath)
 
   if (codeownersFile !== 'CODEOWNERS') {
@@ -56,7 +55,7 @@ export const parseCodeownersFile = (pathname: string): OwnersEntry[] => {
 
     ownerEntries.push({
       path: pathString,
-      usernames: usernames,
+      usernames,
       match: ownerMatcher(pathString),
     })
   })

@@ -11,10 +11,13 @@
     "flowtype-errors"
   ],
   "env": {
+    "jasmine": true,
     "jest": true
   },
   "rules": {
     "flowtype-errors/show-errors": "error",
+    "no-restricted-syntax": 0,
+    "import/prefer-default-export": 0,
     "prettier/prettier": [
       "error",
       {
