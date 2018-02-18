@@ -2,6 +2,7 @@
 
 import fs from 'mz/fs'
 import { testRegExpMatches } from './regexpMetrics'
+import { countEslintRuleViolations } from './eslintMetrics'
 
 const measureFile = async (filePath: string, spec) => {
   const metrics = {}
@@ -10,6 +11,13 @@ const measureFile = async (filePath: string, spec) => {
 
   if (spec.regexpMetrics) {
     Object.assign(metrics, testRegExpMatches(contents, spec.regexpMetrics))
+  }
+
+  if (spec.eslintRules) {
+    Object.assign(
+      metrics,
+      countEslintRuleViolations(contents, spec.eslintRules),
+    )
   }
 
   return metrics
@@ -33,6 +41,9 @@ async function walkSync(dir, spec) {
   return fileMetrics
 }
 
-walkSync('src', { regexpMetrics: { metrics: /metrics/ } }).then(result =>
-  console.log(result),
-)
+const sampleSpec = {
+  eslintRules: { 'no-console': true },
+  regexpMetrics: { metrics: /metrics/ },
+}
+
+walkSync('src', sampleSpec).then(result => console.log(result))
