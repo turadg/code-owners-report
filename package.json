@@ -1,6 +1,6 @@
 {
   "name": "code-owners-report",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Reports metrics on all your files, and rolls them up to owners.",
   "license": "MIT",
   "repository": "turadg/code-owners-report",
