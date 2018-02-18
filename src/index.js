@@ -17,7 +17,7 @@ export const report = async (
     ? parseCodeownersFile(codeownersPath)
     : null
 
-  const byFile = await measureFileTree('src', reportSpec)
+  const byFile = await measureFileTree(basedir, reportSpec)
 
   const byAll = sumAll(reportSpec, byFile)
   const byOwner = ownerEntries

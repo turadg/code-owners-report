@@ -15,6 +15,11 @@ export type OwnersEntry = {
 
 export const findCodeownersPath = (): string => {
   const codeownersPath = findUp.sync('CODEOWNERS', { cwd: process.cwd() })
+
+  if (!codeownersPath) {
+    throw new Error('findCodeownersPath() failed. Please specify instead.')
+  }
+
   const trueCaseCodeownersPath = trueCasePath(codeownersPath)
 
   const codeownersFile = path.basename(trueCaseCodeownersPath)
