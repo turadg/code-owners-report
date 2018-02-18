@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * No CLI tool yet, so the way to use this is by importing the utilities.
  */

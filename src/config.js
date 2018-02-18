@@ -14,3 +14,5 @@ export type ReportSpec = {
   regexpMetrics?: ExpressionMap,
   eslintFlags?: RuleFlags,
 }
+
+export const FILES_SUM_METRIC_KEY = 'files count'

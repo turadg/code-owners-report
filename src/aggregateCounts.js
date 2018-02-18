@@ -4,8 +4,10 @@ import type { FilesMetricsMap, ReportSpec } from './config'
 
 import { whoOwns, type OwnersEntry } from './codeowners'
 
+import { FILES_SUM_METRIC_KEY } from './config'
+
 const mkInitialCounts = (spec: ReportSpec) => {
-  const headings = [].concat(
+  const headings = [FILES_SUM_METRIC_KEY].concat(
     spec.regexpMetrics && Object.keys(spec.regexpMetrics),
     spec.eslintFlags && Object.keys(spec.eslintFlags),
   )
@@ -29,6 +31,8 @@ export const sumAll = (spec: ReportSpec, filesMetricsMap: FilesMetricsMap) => {
     }
   }
 
+  counts[FILES_SUM_METRIC_KEY] = Object.keys(filesMetricsMap).length
+
   return counts
 }
 
@@ -50,6 +54,7 @@ export const sumByOwner = (
         // metric value may be boolean, but that'll cast here to 1 or 0
         ownerCounts[owner][heading] += fileMetrics[heading]
       }
+      ownerCounts[owner][FILES_SUM_METRIC_KEY] += 1
     }
   }
 
