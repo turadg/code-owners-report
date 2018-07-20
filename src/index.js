@@ -6,9 +6,9 @@ import { sumAll, sumByOwner } from './aggregateCounts'
 import type { ReportSpec } from './config'
 
 export type CodeReport = {
-  byFile: Object,
-  byAll: Object,
-  byOwner?: ?Object,
+  eachFile: Object,
+  allSum: Object,
+  ownerSum?: ?Object,
 }
 
 /**
@@ -23,13 +23,13 @@ export const generateReport = async (
     ? parseCodeownersFile(codeownersPath)
     : null
 
-  const byFile = await measureFileTree(basedir, reportSpec)
+  const eachFile = await measureFileTree(basedir, reportSpec)
 
-  const byAll = sumAll(reportSpec, byFile)
-  const byOwner = ownerEntries
-    ? sumByOwner(reportSpec, byFile, ownerEntries)
+  const allSum = sumAll(reportSpec, eachFile)
+  const ownerSum = ownerEntries
+    ? sumByOwner(reportSpec, eachFile, ownerEntries)
     : null
-  return { byFile, byAll, byOwner }
+  return { eachFile, allSum, ownerSum }
 }
 
 export { findCodeownersPath } from './codeowners'
