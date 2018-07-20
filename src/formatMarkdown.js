@@ -53,6 +53,7 @@ export const markdownFileTable = (
  */
 export const formatReport = (reportSpec: ReportSpec, report: *) => {
   const specMetricKeys = [
+    'owners',
     ...Object.keys(reportSpec.regexpMetrics || {}),
     ...Object.keys(reportSpec.eslintFlags || {}),
   ]

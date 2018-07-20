@@ -6,6 +6,7 @@ import fs from 'fs'
 import ignore from 'ignore'
 import path from 'path'
 import trueCasePath from 'true-case-path'
+import type { FileMetrics } from './config';
 
 export type OwnersEntry = {
   path: string, // .gitignore style
@@ -70,6 +71,7 @@ export const parseCodeownersFile = (pathname: string): OwnersEntry[] => {
 /*
  * Return list of owners per CODEOWNERS for the given file.
  */
+// TODO memoize to cache between repeated calls from different sites
 export const whoOwns = (
   ownersEntries: OwnersEntry[],
   filePath: string,
@@ -81,4 +83,9 @@ export const whoOwns = (
     }
   }
   return lastMatchingEntry.usernames
+}
+
+export const addOwners = (ownersEntries: OwnersEntry[], filePath: string, metrics: Object) => {
+ const owners = whoOwns(ownersEntries, filePath).join(', ');
+ metrics['owners'] = owners;
 }

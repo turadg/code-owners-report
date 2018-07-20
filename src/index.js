@@ -1,6 +1,6 @@
 // @flow
 import measureFileTree from './measureFileTree'
-import { parseCodeownersFile } from './codeowners'
+import { addOwners, parseCodeownersFile } from './codeowners'
 import { sumAll, sumByOwner } from './aggregateCounts'
 
 import type { ReportSpec } from './config'
@@ -26,9 +26,13 @@ export const generateReport = async (
   const eachFile = await measureFileTree(basedir, reportSpec)
 
   const allSum = sumAll(reportSpec, eachFile)
-  const ownerSum = ownerEntries
-    ? sumByOwner(reportSpec, eachFile, ownerEntries)
-    : null
+  let ownerSum = null
+  if (ownerEntries) {
+    ownerSum = sumByOwner(reportSpec, eachFile, ownerEntries);
+    for (const filename of Object.keys(eachFile)) {
+      addOwners(ownerEntries, filename, eachFile[filename]);
+    }
+  }
   return { eachFile, allSum, ownerSum }
 }
 
