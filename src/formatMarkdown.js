@@ -38,12 +38,11 @@ export const markdownFileTable = (
   metricKeys: string[],
   eachFile: FilesMetricsMap,
 ) => {
-  const ownersAndMetricsKeys = ['owners', ...metricKeys]
-  const headers = ['filename', ...ownersAndMetricsKeys]
+  const headers = ['filename', ...metricKeys]
 
   const rows = Object.keys(eachFile).map(filename => [
     filename,
-    ...metricsFor(ownersAndMetricsKeys, eachFile[filename]),
+    ...metricsFor(metricKeys, eachFile[filename]),
   ])
 
   return markdownTable([headers, ...rows])
