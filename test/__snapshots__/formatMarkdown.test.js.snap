@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`markdownFileTable renders 1`] = `
+"| filename | owners    | metric1 | metric2 |
+| -------- | --------- | ------- | ------- |
+| file1    | alice,bob | 9       | true    |
+| file2    | cathy,dan | -1      | -       |"
+`;

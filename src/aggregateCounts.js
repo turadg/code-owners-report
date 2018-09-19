@@ -51,6 +51,9 @@ export const sumByOwner = (
       }
       const fileMetrics = filesMetricsMap[filename]
       for (const heading of Object.keys(fileMetrics)) {
+        // HACK for passing owners info on the metrics object
+        // eslint-disable-next-line no-continue
+        if (heading === 'owners') continue
         // metric value may be boolean, but that'll cast here to 1 or 0
         ownerCounts[owner][heading] += fileMetrics[heading]
       }

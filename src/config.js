@@ -1,6 +1,9 @@
 // @flow
 
-export type FileMetrics = { [measure: string]: number | boolean }
+export type FileMetrics = {
+  owners?: string[], // HACK to pass along owner info
+  [measure: string]: number | boolean,
+}
 
 export type FilesMetricsMap = { [filename: string]: FileMetrics }
 
