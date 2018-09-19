@@ -66,7 +66,7 @@ export const formatReport = (reportSpec: ReportSpec, report: *) => {
       ? markdownOwnersTable(specMetricKeys, report.ownerSum)
       : 'Missing CODEOWNERS',
     '## Each file',
-    markdownFileTable(specMetricKeys, report.eachFile),
+    markdownFileTable(['owners', ...specMetricKeys], report.eachFile),
     '\n',
   ].join('\n\n')
 
