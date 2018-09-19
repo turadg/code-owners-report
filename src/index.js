@@ -28,9 +28,9 @@ export const generateReport = async (
   const allSum = sumAll(reportSpec, eachFile)
   let ownerSum = null
   if (ownerEntries) {
-    ownerSum = sumByOwner(reportSpec, eachFile, ownerEntries);
+    ownerSum = sumByOwner(reportSpec, eachFile, ownerEntries)
     for (const filename of Object.keys(eachFile)) {
-      addOwners(ownerEntries, filename, eachFile[filename]);
+      addOwners(ownerEntries, filename, eachFile[filename])
     }
   }
   return { eachFile, allSum, ownerSum }

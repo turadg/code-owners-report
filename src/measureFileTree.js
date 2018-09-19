@@ -41,16 +41,17 @@ export default async function measureFileTree(
   // consider https://github.com/jergason/recursive-readdir
   const files = fs.readdirSync(dir) || []
   // Revisit this if perf is an issue.
-  // eslint-disable-next-line no-await-in-loop
   for (const file of files) {
     const subpath = `${dir}/${file}`
     if (fs.statSync(subpath).isDirectory()) {
+      // eslint-disable-next-line no-await-in-loop
       const treeMetrics: FilesMetricsMap = await measureFileTree(subpath, spec)
       Object.assign(metrics, treeMetrics)
     } else if (spec.omit && subpath.match(spec.omit)) {
       console.log('  omitting file', subpath)
     } else {
       console.log('  measuring file', subpath)
+      // eslint-disable-next-line no-await-in-loop
       const fileMetrics: FileMetrics = await measureFile(subpath, spec)
       metrics[subpath] = fileMetrics
     }
