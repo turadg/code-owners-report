@@ -15,7 +15,7 @@ export type CodeReport = {
  * Generate a report over the `basedir`
  */
 export const generateReport = async (
-  basedir: string,
+  basedirOpt: string[] | string,
   reportSpec: ReportSpec,
   codeownersPath?: string,
 ): Promise<CodeReport> => {
@@ -23,7 +23,12 @@ export const generateReport = async (
     ? parseCodeownersFile(codeownersPath)
     : null
 
-  const eachFile = await measureFileTree(basedir, reportSpec)
+  const basedirs = Array.isArray(basedirOpt) ? basedirOpt : [basedirOpt]
+  console.log('basedirs', basedirs)
+  const filesByDir = await Promise.all(
+    basedirs.map(d => measureFileTree(d, reportSpec)),
+  )
+  const eachFile = filesByDir.reduce((acc, curr) => ({ ...acc, ...curr }), {})
 
   const allSum = sumAll(reportSpec, eachFile)
   let ownerSum = null
