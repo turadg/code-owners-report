@@ -17,8 +17,10 @@ export type CodeReport = {
 export const generateReport = async (
   basedirOpt: string[] | string,
   reportSpec: ReportSpec,
+  ignores?: string[] = [],
   codeownersPath?: string,
 ): Promise<CodeReport> => {
+  console.log({ignores})
   const ownerEntries = codeownersPath
     ? parseCodeownersFile(codeownersPath)
     : null
@@ -26,7 +28,7 @@ export const generateReport = async (
   const basedirs = Array.isArray(basedirOpt) ? basedirOpt : [basedirOpt]
   console.log('basedirs', basedirs)
   const filesByDir = await Promise.all(
-    basedirs.map(d => measureFileTree(d, reportSpec)),
+    basedirs.map(d => measureFileTree(d, reportSpec, ignores)),
   )
   const eachFile = filesByDir.reduce((acc, curr) => ({ ...acc, ...curr }), {})
 
